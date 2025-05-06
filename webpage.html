@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Strength Assessment Tool</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="password.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #333;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+        }
+        input {
+            width: 400px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .pass-strength-text {
+            font-weight: bold;
+        }
+        .revolving-text {
+            margin-top: 20px;
+        }
+        .revolving-text a {
+            color: #99c2ff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Password Strength Assessment Tool</h1>
+        <div>
+            <label for="password">Type in a password to check its strength:</label>
+            <input id="password" type="password" />
+        </div>
+        <div class="revolving-text"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#password').password();
+
+            var links = [
+                'https://example.com/password-tips',
+                'https://example.org/secure-passwords',
+                'https://example.net/password-best-practices'
+            ];
+
+            var currentIndex = 0;
+            var $revolvingText = $('.revolving-text');
+
+            function displayNextLink() {
+                var link = links[currentIndex];
+                $revolvingText.html('<a href="' + link + '" target="_blank">' + link + '</a>');
+                currentIndex = (currentIndex + 1) % links.length;
+            }
+
+            setInterval(displayNextLink, 5000); // Change link every 5 seconds
+        });
+    </script>
+</body>
+</html>
